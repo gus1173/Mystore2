@@ -1,0 +1,24 @@
+{% extends 'nav.html' %}
+{% block nav %}
+
+<div class="p-5">
+    {% for i in orders %}
+    <div class="row p-3 border shadow mb-2">
+        <div class="col">
+            <img src="{{i.products.image.url}}" height="200px" alt="">
+        </div>
+        <div class="col d-flex flex-column justify-content-center">
+            <h4>{{ i.products.product_name}}</h4>
+            <p>{{ i.products.price}}</p>
+            <div class="d-flex justify-content-between">
+                <h4>{{i.status}}</h4>
+                {% if i.status == 'Shipped' or i.status == 'Order placed' %}
+                    <a href="{% url 'orddel' i.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel Order</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock nav %}
